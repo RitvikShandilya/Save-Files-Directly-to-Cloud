@@ -1,0 +1,27 @@
+{
+  "name": "save2drive",
+  "version": "0.0.0",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "^2.5.7",
+    "emailjs": "^2.0.0",
+    "express": "^4.16.3",
+    "google-auth-library": "^0.9.7",
+    "googleapis": "^3.1.0",
+    "morgan": "~1.6.1",
+    "pretty-time": "^0.2.0",
+    "prettysize": "0.0.3",
+    "progress-stream": "2.0.0",
+    "request": "^2.85.0",
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^2.0.4",
+    "underscore": "^1.8.3"
+  }
+}

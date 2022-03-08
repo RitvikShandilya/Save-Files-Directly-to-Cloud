@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+  <link href="https://unpkg.com/vuetify@1.0.17/dist/vuetify.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/toastify.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src ="/socket.io/socket.io.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="google-site-verification" content="t5iXU0BZkmmvAJooSGtO75ENr_JOV1q0bHLG_WBo0lI" />
+</head>
+<body>
+<div id="fb-root"></div>
+<div class="fb-customerchat"
+  page_id="217169682367060">
+</div>
+  <div id="files">
+      <v-app>
+                <v-toolbar dark style="background: #1867c0;" id="app-toolbar" flat height="58px">
+
+            	  <img
+                    src="/images/nav_logo.svg"
+                    height="38px"
+                >
+                </img>
+                <v-toolbar-title class="toolbar__title pb-1 hidden-xs-only">File To Drive</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items class="toolbar__items">
+                <v-btn flat class="btns hidden-xs-only">Guide</v-btn>
+                <v-btn flat flat class="btns" href="/authenticate">Connect Drive<v-icon right dark>cloud_circle</v-icon></v-btn>
+                </v-toolbar-items>
+
+                </v-toolbar>
+
+                <v-content>
+                    <div>
+                        <v-jumbotron :gradient="gradient" dark style="height:auto;">
+                            <v-container fill-height class="mb-3 mt-3">
+                                <v-layout align-center justify-center wrap>
+                                <img
+                                  src="/images/hpage.png"
+                                  height="256px"
+                                  class="mx-4"
+                                  alt="logo"
+                                >
+                                </img>
+                                <v-flex class="text-xs-center text-md-left shrink">
+                                  <h1 :class="headingClasses" style="font-weight:300;">Save Web Files<br>Directly to Cloud</h1>
+                                  <v-btn class="white primary--text" large href="/authenticate">Connect Google Drive</v-btn>
+                                      	<v-chip outline color="white" v-if="!message">
+										                      Drive Connected
+                                      	<v-icon class="pl-2">cloud_done</v-icon>
+                                      	</v-chip></v-btn>
+                                </v-flex>
+                                </v-layout>
+                            </v-container>
+
+                              <v-container>
+                                <v-layout align-center justify-center wrap>
+                                  <v-flex sm12 md7>
+                                    <v-text-field solo light
+                                      label="Place URL Here"
+                                      v-model="file_url"
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 md1 text-xs-center>
+                                    <v-btn
+                                      @click="submitUrlForUpload(); loader = 'loading4'"
+                                      :disabled="loading4"
+                                      :loading="loading4"
+                                      class="white--text"
+                                      large
+                                      outline
+                                    >
+                                      Upload
+                                      <span slot="loader" class="custom-loader">
+                                        <v-icon light>cached</v-icon>
+                                      </span>
+                                    </v-btn>
+                                  </v-flex>
+                                  <v-flex md6 sm12>
+                                    <v-text-field
+                                      v-show="isEmail"
+                                      label="Email address"
+                                      :rules="emailRules"
+                                      v-model="email"
+                                      hint="Enter your email!"
+                                      color="white"
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 lg8 md7>
+                                    <v-checkbox
+                                    label="Mail me when upload is success/error"
+                                    v-model="isEmail"
+                                    color="white"
+                                    value="red"
+                                    hide-details
+                                    ></v-checkbox>
+                                  </v-flex>
+                                </v-layout>
+                              </v-container>
+
+                              <v-container style="max-width:1280px;" grid-list-xl mb-5>
+                                  <v-layout row wrap justify-center>
+                                      <v-flex xs12 sm6 md4 lg4>
+                                        <v-card light style="height:auto;max-width:375px;" class="elevation-24">
+                                          <img src="/images/fast.svg" width="100%" class="mb-2">
+                                            <v-card-text>
+                                              <h3 class="mb-3 text-xs-center" style="font-size:18px;font-weight:500;">Fast</h3>
+                                              <p class="text-xs-center mb-2">Your files are uploaded remotely through our servers having huge internet bandwidths available to use just for our users.</p>
+                                            </v-card-text>
+                                        </v-card>
+                                      </v-flex>
+                                      <v-flex xs12 sm6 md4 lg4>
+                                          <v-card light style="height:auto;max-width:375px;" class="elevation-24">
+                                            <img src="/images/simple.svg" width="100%" class="mb-2">
+                                              <v-card-text>
+                                                <h3 class="mb-3 text-xs-center" style="font-size:18px;font-weight:500;">Easy To use</h3>
+                                                <p class="text-xs-center mb-2">You dont have to download then upload the file, just paste the file download url and it will be automatically uploaded to cloud.</p>
+                                              </v-card-text>
+                                          </v-card>
+                                        </v-flex>
+                                        <v-flex xs12 sm6 md4 lg4>
+                                            <v-card light style="height:auto;max-width:375px;" class="elevation-24">
+                                              <img src="/images/secure.svg" width="100%" class="mb-2">
+                                                <v-card-text>
+                                                  <h3 class="mb-3 text-xs-center" style="font-size:18px;font-weight:500;">Secure File Transfer</h3>
+                                                  <p class="text-xs-center mb-2">Your files are never saved in our servers, they are divided into small parts just for the transfer process and then deleted.</p>
+                                                </v-card-text>
+                                            </v-card>
+                                          </v-flex>
+                                    </v-layout>
+                              </v-container>
+                        </v-jumbotron>
+
+                            <v-container fluid grid-list-xl fill-height v-for="(file, index) in reverseItems" :key="file.name" id="focuser">
+                          		<v-layout row justify-center>
+                            		<v-flex xs12 sm12 md8 lg6 class="pa-0">
+                               			<v-fade-transition>
+
+                              			<v-card height="line.height" class="pa-0">
+                                        	<v-toolbar color="blue darken-1" dark>
+                                          	<v-toolbar-title>{{index+1}}. File: {{file.name}}</v-toolbar-title>
+                                          	<v-progress-circular indeterminate color="white" class="ml" v-show="file.progress.at!=100"></v-progress-circular>
+                                          	<v-icon medium dark v-show="file.progress.at==100" class="ml">cloud_done</v-icon>
+                                          	<v-spacer></v-spacer>
+                                           	<v-btn fab dark small color="indigo" @click.stop="removeView(index)">
+                                                <v-icon medium dark>close</v-icon>
+                                           	</v-btn>
+                                          	</v-toolbar>
+                                  				<v-container>
+                                        			<h2 class="subheading nobr">File Type:</h2>
+                                        			<v-chip label color="orange darken-3 mb-3" text-color="white">
+                          								<v-icon left>insert_drive_file
+                    									</v-icon>{{file.type}}
+                        							</v-chip><v-btn flat color="error" class="right" @click.stop="removeView(index)">CANCEL</v-btn>
+                                    				<v-divider></v-divider>
+                                        			<h2 class="subheading mt-2 mb-2">{{file.progress.speed || 0}} - {{file.progress.uploaded || 0}} of {{file.size}} ({{file.progress.at}} %)</h2>
+                      								<v-progress-linear
+                        								v-model="file.progress.at"
+                        								color="success"
+                      								></v-progress-linear>
+                                    				<h2 class="subheading mb-2 nobr">Time Left: {{file.progress.eta || 0}}</h2><h2 class="subheading mb-2 nobr right">Remaining: {{file.progress.remains || 0}}</h2>
+                                    				</v-card-text>
+                                    			</v-container>
+
+             <v-divider></v-divider>
+                        <trend
+    v-if="file.progress.at!=100 || 0"
+    :data="file.progress.arr || 0"
+    :gradient="['#6fa8dc', '#42b983', '#2c3e50']"
+    auto-draw
+    smooth>
+  </trend>
+
+                              			</v-card>
+                              			</v-fade-transition>
+                            		</v-flex>
+                          		</v-layout>
+                          </v-container>
+                        </div>
+
+                          <section>
+                            <v-container grid-list-xl fluid>
+                            <v-layout wrap justify-center class="my-5" align-center row>
+                              <v-flex md6 lg4>
+                              <h2 class="display-1 mb-3" align center>Transfer Files of upto 1TB!</h2>
+                              <h4 class="headline" style="font-size:21px!important">There is no cap or limit on the maximum file size you can directly or remotely upload to google drive. A long as there is enough space in your cloud drive, the file will get uploaded.</h4>
+                              </v-flex>
+                              <v-flex md6 lg5>
+                                  <img src="/images/1tb.svg" width="70%" style="display:block;margin-left: auto; margin-right: auto;">
+                              </v-flex>
+                            </v-layout>
+                          </v-container>
+                          <v-divider></v-divider>
+                          <v-container grid-list-xl>
+                              <v-layout wrap justify-center class="my-5" align-center>
+                                  <v-flex md6 lg5>
+                                      <img src="/images/all.svg" width="70%" style="display:block;margin-left: auto; margin-right: auto;">
+                                  </v-flex>
+                                <v-flex md6 lg4>
+                                <h2 class="display-1 mb-3" align center>File To Drive Supports all Kinds of File Formats</h2>
+                                <h4 class="headline" style="font-size:21px!important">You can transfer or save pdf, zip, video and any other kind of file directly to google drive without having to download it to your computer then re-uploading it. Our servers upload it for you at the maximum speed possible!</h4>
+                                </v-flex>
+                              </v-layout>
+                            </v-container>
+                            <v-divider></v-divider>
+                            <v-container grid-list-xl>
+                                <v-layout wrap justify-center class="my-5" align-center>
+                                  <v-flex md6 lg4>
+                                  <h2 class="display-1 mb-3" align center>Get Notified By E-mail when the Transfer is Completed</h2>
+                                  <h4 class="headline" style="font-size:21px!important">Just paste in the file link / url and relax. You will get notified through E-mail when the file gets uploaded or there is any issue. You can even close your tab or browser even before the upload is complete :)</h4>
+                                  </v-flex>
+                                  <v-flex md6 lg5>
+                                      <img src="/images/email.svg" width="70%" style="display:block;margin-left: auto; margin-right: auto;">
+                                  </v-flex>
+                                </v-layout>
+                              </v-container>
+
+                        </section>
+                </v-content>
+                <v-footer height="auto">
+
+                  <v-jumbotron :gradient="gradient2" dark height="auto">
+
+            <v-container>
+            <v-layout align-center justify-center>
+                      <strong class="subheading" style="font-size:21px!important">Get connected with us on social networks</strong>
+              </v-layout>
+              <v-layout align-center justify-center>
+                      <v-btn
+                        icon
+                        dark
+                        class="mx-1"
+                        href="https://www.facebook.com/File-To-Drive-217169682367060/"
+                        target="_blank"
+                      >
+                        <v-icon size="24px">fab fa-facebook</v-icon>
+                      </v-btn>
+
+                      <v-btn
+                        icon
+                        dark
+                        class="mx-1"
+                        href="https://twitter.com/filetodrive"
+                        target="_blank"
+                      >
+                        <v-icon size="24px">fab fa-twitter</v-icon>
+                      </v-btn>
+
+                      <v-btn
+                        icon
+                        dark
+                        class="mx-1"
+                        href="https://plus.google.com/115221775446847664653"
+                        target="_blank"
+                      >
+                        <v-icon size="24px">fab fa-google-plus</v-icon>
+                      </v-btn>
+
+                      <v-btn
+                        icon
+                        dark
+                        class="mx-1"
+                        href="https://www.instagram.com/file_to_drive/"
+                        target="_blank"
+                      >
+                        <v-icon size="24px">fab fa-instagram</v-icon>
+                      </v-btn>
+              </v-layout>
+               <v-layout align-center justify-center>
+             <a href="https://filetodrive.com/privacy.html" style="text-decoration:none"><v-btn flat color="white">Privacy Policy</v-btn></a>
+                  <a href="https://www.facebook.com/File-To-Drive-217169682367060/" target="_blank" style="text-decoration:none"><v-btn flat color="white">Contact Us</v-btn></a>
+              </v-layout>
+               <v-layout align-center justify-center>
+               <strong class="body-1">Copyright © 2020 by Ritvik Shandilya</strong>
+               </v-layout>
+            </v-container>
+                </v-jumbotron>
+
+          </v-footer>
+    </v-app>
+  </div>
+
+ <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuetify@1.0.17/dist/vuetify.js"></script>
+<script src="https://unpkg.com/vuetrend@0.3.2/dist/vue-trend.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.0/vue-resource.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src ="javascripts/app.js"></script>
+  <script type="text/javascript" src="javascripts/toastify.js"></script>
+  <script src ="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</body>
+</html>

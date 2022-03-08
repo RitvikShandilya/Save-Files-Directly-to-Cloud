@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+  <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  <div id="app">
+    <v-app>
+              <v-toolbar dark style="background: rgba(0,0,0,0); z-index:100; position:absolute" id="app-toolbar" flat height="58px">
+            	<img
+                    src="/images/nav_logo.svg"
+                    height="38px"
+                    href="https://filetodrive.com"
+                >
+                </img>
+              <v-toolbar-title class="toolbar__title pb-1 hidden-xs-only">File To Drive</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items class="toolbar__items">
+                <v-btn flat class="btns hidden-xs-only">Guide</v-btn>
+              </v-toolbar-items>
+		</v-toolbar>
+      <v-content>
+        <div>
+            <v-jumbotron :gradient="gradient" dark style="height:29vh">
+              <v-container fill-height>
+                <v-layout align-center>
+                  <v-flex text-xs-center>
+                    <h1 class="display-3">Privacy Policy</h3>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-jumbotron>
+        </div>
+        <v-container>
+          <v-layout justify-center>
+          <v-flex lg8 md10 sm10 xs12>
+          <p class="subheading" style="margin: 30px 0px 40px 0px">We at File To Drive understand your concerns about how we get and use your information and we want to make it as clear as possible about how we use and protect your information. All of the Information Collected by us is only after you give us the permissions. We only collect the minimum amount of information which is essential only for the functioning of our web app. We don’t sell it to third parties at any cost and constantly take measures in order to prevent any security breaches.
+          </p>
+          <h2 class="headline" style="margin: 0px 0px 12px 0px">
+              What information we collect and for what reason.
+          </h2>
+          <h3 class="title" style="margin: 0px 0px 10px 0px">
+              Information from visitor’s browser
+          </h3>
+          <p class="subheading">
+              When a visitors lands on our website then information that is collected is cookies, the user’s IP address, system time whether the user has connected his google drive to our web app or not.
+              When user connects his google drive then additional information such as full name and access to google drive contents is also granted to us as long as the user does not want to revoke the access to google drive.
+
+          </p>
+
+          <h3 class="title" style="margin: 0px 0px 10px 0px">
+              Cookies Data
+          </h3>
+          <p class="subheading">
+              These are text files which are stored on the hard drive of anyone who visits our File To Drive. With cookies, our user’s don't have to connect their google drive everytime they want to use our service thereby saving their time and improving the user experience. By using our website, you agree that we can use cookies to be stored in your browser memory.
+          </p>
+
+          <h3 class="title" style="margin: 0px 0px 10px 0px">
+              Analytics Data
+          </h3>
+          <p class="subheading">
+              We use google analytics for monitoring the site on time, bounce rate and how much traffic our servers are getting so that we can get the time to perform scaling before the website starts to slow down. All of our analytics data is used for enhancing user experience and is never sold to any third party at any condition.
+          </p>
+
+          <h2 class="headline" style="margin: 40px 0px 12px 0px">
+              How File To Drive Uses the collected data
+          </h2>
+          <h3 class="title" style="margin: 0px 0px 10px 0px">
+              Reason for collecting all this information
+          </h3>
+          <p class="subheading">
+              We collect visitor’s IP address just because of protecting our website from potential Security Attacks like denial of service. Information after granting access to google drive is used to provide the functionality that we offer which is transferring files to google drive account.
+          </p>
+
+          <h2 class="headline" style="margin: 40px 0px 12px 0px">
+              Do we store any personal data of any kind?
+          </h2>
+          <p class="subheading">
+              No, we don't store any data and don’t even plan to store it because we believe it not relevant at all presently for improving the user experience.
+          </p>
+
+          <h2 class="headline" style="margin: 40px 0px 12px 0px">
+              Does file To Drive Share any User data?
+          </h2>
+          <p class="subheading">
+              We don’t share any user data with our subsidiaries, affiliates, service providers and third parties. No plans are there currently to do so and our users will be notified on our website if any changes are made concerned with sharing of user data.
+          </p>
+          <h2 class="headline" style="margin: 40px 0px 12px 0px">
+              How File To Drive Protects user data
+          </h2>
+          <p class="subheading">
+              We use the drive API to get user’s full name and access to drive contents. All of this information is never stored on our servers because prevention is always better than fixing the problems in future.
+We can’t guarantee you full security on this matter because unfortunately complete security does not exist but do our best by collecting as fewer user data as possible.
+          </p>
+          <h2 class="headline" style="margin: 40px 0px 12px 0px">
+              Modifications to our privacy statement
+          </h2>
+          <p class="subheading">
+              Any changes made to our privacy policy statement will be shown to all of our visitors constantly 40 days prior to the changes taking effect on the top of our landing page. Our users are responsible if we are not able to communicate the changes as we don’t store any E-mail addresses so users will have to visit our website in order to see the modifications in the privacy statement.
+          </p>
+          </v-flex>
+          </v-layout>
+        </v-container>
+      </v-content>
+    </v-app>
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+  <script>
+    new Vue({ el: '#app',
+              data: {
+                gradient: 'to top, #48c6ef, #6f86d6'
+              }
+    })
+  </script>
+</body>
+</html>
