@@ -4,7 +4,7 @@
 - [Ritvik Shandilya](https://github.com/ritvikshandilya)
 
 
-### Transfer files directy from the cloud to google drive without downloading them to your system (Feature Requests are welcomed!)
+### Transfer files directy from the cloud to google drive without downloading them to your system (New feature requests are welcomed!)
 
 ![f2d video](https://user-images.githubusercontent.com/5859629/157323083-8e0bd4e6-0238-4b71-a3f1-4317bb999944.gif)
 
