@@ -8,7 +8,7 @@ on:
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USER }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-  REPO_NAME: "SF"
+  REPO_NAME: "save2drive"
 
 jobs:
   build-and-push:
